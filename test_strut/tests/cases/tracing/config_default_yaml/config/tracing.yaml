@@ -1,0 +1,15 @@
+tracing:
+    verbosity: info # off, error, warn, info (default), debug, trace
+    flavor: full # full (default), compact, pretty, json (with `tracing-json` feature)
+    show_color: true
+    show_timestamp: true
+    show_target: true
+    show_file: false
+    show_line_number: false
+    show_level: true
+    show_thread_id: true
+    show_thread_name: false
+    flatten_json: true # with `tracing-json` feature
+    targets:
+        my_crate: info # off, error, warn, info (default), debug, trace
+        my_crate::interesting_module: off # same as above

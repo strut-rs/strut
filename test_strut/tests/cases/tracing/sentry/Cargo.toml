@@ -1,0 +1,15 @@
+[package]
+name = "test"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies.strut]
+path = "../../../../../strut"
+features = [
+    "tracing",
+    "sentry",
+]
+
+[workspace]
+# empty array to confirm that this crate is not part of a workspace

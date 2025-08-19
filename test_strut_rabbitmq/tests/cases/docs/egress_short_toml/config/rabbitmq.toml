@@ -1,0 +1,2 @@
+[rabbitmq.egress]
+named_egress = "demo.routing.key"

@@ -1,0 +1,8 @@
+rabbitmq:
+    egress:
+        demo_egress:
+            routing_key: demo.key.yaml
+
+    ingress:
+        demo_ingress:
+            queue: demo.key.yaml

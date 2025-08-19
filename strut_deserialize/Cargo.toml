@@ -1,0 +1,40 @@
+[package]
+name           = "strut-deserialize"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "Deserialization utilities. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name = "strut_deserialize"
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+serde       = { workspace = true, features = ["std", "derive"] }
+serde-value = { workspace = true, features = [] }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+default = []
+_probe  = []
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]

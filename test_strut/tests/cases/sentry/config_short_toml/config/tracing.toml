@@ -1,0 +1,2 @@
+[sentry]
+dsn = "https://0123456789abcdef0123456789abcdef@012345.ingest.sentry.1o/9876543"

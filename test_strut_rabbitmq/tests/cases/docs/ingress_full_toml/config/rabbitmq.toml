@@ -1,0 +1,22 @@
+[rabbitmq.ingress.named_ingress.exchange]
+name = "demo.exchange.name"
+kind = "direct" # direct (default), fanout, headers, topic, hash_key, hash_id
+durable = true
+auto_delete = false
+
+[rabbitmq.ingress.named_ingress]
+queue = "demo.queue.name"
+durable = false
+exclusive = false
+auto_delete = false
+batch_size = 1
+batch_timeout = "250ms"
+# prefetch_count = 100 # TOML doesn’t support null values, so we have to omit the value if we don’t want any prefetch
+acking_behavior = "manual" # manual (default), auto
+gibberish_behavior = "complete" # complete (default), backwash, abandon
+binding_keys = [
+  "demo.binding.key.1",
+  "demo.binding.key.2"
+]
+# binding_headers = { header_a = 12, header_b = true } # commented out because direct exchange cannot have headers
+headers_behavior = "all" # all (default), any

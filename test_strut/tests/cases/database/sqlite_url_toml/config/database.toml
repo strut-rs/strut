@@ -1,0 +1,9 @@
+[database]
+url = "sqlite://default.db?mode=ro" # assuming SQLite is the default type
+
+# two syntaxes below are equivalent
+[database.sqlite]
+named_sqlite_a = "sqlite://named_sqlite_a.db?mode=ro"
+
+[database.sqlite.named_sqlite_b]
+url = "sqlite://named_sqlite_b.db?mode=ro"

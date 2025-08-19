@@ -1,0 +1,10 @@
+database:
+    host: localhost
+    port: 5433 # assuming PostgreSQL is the default type
+    database: default
+
+    postgres:
+        named_postgres:
+            host: localhost
+            port: 5433
+            database: named_postgres

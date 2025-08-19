@@ -1,0 +1,5 @@
+[rabbitmq.egress.demo_egress]
+routing_key = "demo.key.toml"
+
+[rabbitmq.ingress.demo_ingress]
+queue = "demo.key.toml"

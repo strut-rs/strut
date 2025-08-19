@@ -1,0 +1,59 @@
+[package]
+name           = "strut-sentry"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "Integration with Sentry. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name = "strut_sentry"
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+# Internal
+strut-factory      = { path = "../strut_factory" }
+strut-deserialize  = { path = "../strut_deserialize" }
+strut-core         = { path = "../strut_core" }
+
+# External
+sentry             = { workspace = true, features = ["backtrace", "contexts", "debug-images", "panic", "transport", "release-health"] }
+tokio              = { workspace = true, features = [] }
+secure-string      = { workspace = true, features = ["serde"] }
+serde              = { workspace = true, features = ["std", "derive"] }
+humantime          = { workspace = true, features = [] }
+
+# Optional
+sentry-tracing     = { optional = true, workspace = true, features = [] }
+tracing            = { optional = true, workspace = true, features = [] }
+tracing-subscriber = { optional = true, workspace = true, features = [] }
+
+[dev-dependencies]
+pretty_assertions  = { workspace = true }
+serde_yml          = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+tracing = ["dep:sentry-tracing", "dep:tracing", "tracing/std", "dep:tracing-subscriber"]
+default = []
+_probe  = ["tracing"]
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]
+isolated_feature_sets = [
+    ["tracing"],
+]

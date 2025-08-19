@@ -1,0 +1,46 @@
+[package]
+name           = "strut-factory"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "Procedural macros. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name       = "strut_factory"
+proc-macro = true
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+proc-macro2  = { workspace = true, features = [] }
+quote        = { workspace = true, features = [] }
+syn          = { workspace = true, features = ["clone-impls", "derive", "full", "parsing", "printing", "proc-macro"] }
+convert_case = { workspace = true, features = [] }
+
+[dev-dependencies]
+strut             = { path = "../strut" }
+pretty_assertions = { workspace = true }
+serde             = { workspace = true }
+serde_json        = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+default = []
+_probe  = []
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]

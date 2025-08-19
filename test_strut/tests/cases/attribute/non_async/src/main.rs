@@ -1,0 +1,2 @@
+#[strut::main]
+fn main() {}

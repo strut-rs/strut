@@ -1,0 +1,13 @@
+[database.mysql.my-database]
+username = "username"
+password = "changeme"
+host = "example.com"
+port = 3306
+database = "my_database"
+
+[database.mysql.other-database]
+username = "username"
+password = "changeme"
+host = "example.com"
+port = 3306
+database = "other_database"

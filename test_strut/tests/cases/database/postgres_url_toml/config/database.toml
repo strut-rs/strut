@@ -1,0 +1,9 @@
+[database]
+url = "postgresql://user:secret@localhost:5433/default" # assuming PostgreSQL is the default type
+
+# two syntaxes below are equivalent
+[database.postgres]
+named_postgres_a = "postgresql://user:secret@localhost:5433/named_postgres_a"
+
+[database.postgres.named_postgres_b]
+url = "postgresql://user:secret@localhost:5433/named_postgres_b"

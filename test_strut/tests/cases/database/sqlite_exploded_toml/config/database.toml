@@ -1,0 +1,11 @@
+[database] # assuming SQLite is the default type
+filename = "default.db"
+in_memory = false
+read_only = false
+create_if_missing = false
+
+[database.sqlite.named_sqlite]
+filename = "named_sqlite.db"
+in_memory = false
+read_only = false
+create_if_missing = false

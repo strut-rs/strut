@@ -1,0 +1,7 @@
+database:
+    mysql:
+        named_mysql: {}
+    postgres:
+        named_postgres: {}
+    sqlite:
+        named_sqlite: {}

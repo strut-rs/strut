@@ -1,0 +1,56 @@
+[package]
+name           = "strut-tracing"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "A convenience layer around `tracing` crate. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name = "strut_tracing"
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+# Internal
+strut-factory      = { path = "../strut_factory" }
+strut-deserialize  = { path = "../strut_deserialize" }
+
+# External
+tracing-core       = { workspace = true, features = [] }
+tracing-subscriber = { workspace = true, features = ["fmt", "ansi"] }
+serde              = { workspace = true, features = ["std", "derive"] }
+
+# Optional
+log                = { optional = true, workspace = true, features = [] }
+
+[dev-dependencies]
+pretty_assertions  = { workspace = true }
+serde_yml          = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+json    = ["tracing-subscriber/json"]
+log     = ["dep:log"]
+default = []
+_probe  = ["json", "log"]
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]
+isolated_feature_sets = [
+    ["json"],
+    ["log"],
+]

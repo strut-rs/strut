@@ -1,0 +1,4 @@
+database:
+    mysql:
+        my-database: mysql://username:changeme@example.com:3306/my_database
+        other-database: mysql://username:changeme@example.com:3306/other_database

@@ -1,0 +1,9 @@
+# Rust
+target
+Cargo.lock
+
+# Local environment defaults
+.env.local
+
+# macOS
+.DS_Store

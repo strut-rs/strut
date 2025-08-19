@@ -1,0 +1,8 @@
+sentry:
+    dsn: https://0123456789abcdef0123456789abcdef@012345.ingest.sentry.1o/9876543
+    debug: false
+    sample_rate: 1.0
+    traces_sample_rate: 0.0
+    max_breadcrumbs: 64
+    attach_stacktrace: false
+    shutdown_timeout: 2s # parsed using `humantime` crate

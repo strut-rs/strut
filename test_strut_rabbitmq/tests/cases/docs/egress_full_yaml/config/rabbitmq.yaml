@@ -1,0 +1,7 @@
+rabbitmq:
+    egress:
+        named_egress:
+            exchange: amq.topic
+            routing_key: demo.routing.key
+            confirmation: routed # transmitted (default), accepted, routed
+            force_durable: false

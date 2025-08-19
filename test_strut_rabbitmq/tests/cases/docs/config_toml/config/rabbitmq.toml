@@ -1,0 +1,19 @@
+[rabbitmq]
+host = "localhost" # default RabbitMQ handle
+port = 5672
+user = "guest"
+password = "guest"
+vhost = "/"
+
+[rabbitmq.extra.named_handle] # additional named RabbitMQ handles
+host = "localhost"
+port = 3372
+user = "admin"
+password = "admin"
+vhost = "/custom"
+
+[rabbitmq.egress]
+named_publisher = "routing.key" # publisher definition goes here
+
+[rabbitmq.ingress]
+named_subscriber = "queue.name" # subscriber definition goes here

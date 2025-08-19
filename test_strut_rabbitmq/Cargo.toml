@@ -1,0 +1,44 @@
+[package]
+name           = "test-strut-rabbitmq"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "System tests for `strut-rabbitmq` crate. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = false
+
+[lib]
+name = "test_strut_rabbitmq"
+
+#
+# DEPENDENCIES
+#
+[dev-dependencies]
+# Internal
+strut-rabbitmq    = { path = "../strut_rabbitmq" }
+test-util         = { path = "../test_util" }
+
+# External
+pretty_assertions = { workspace = true }
+tokio             = { workspace = true }
+rand              = { workspace = true }
+parking_lot       = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+default = []
+_probe  = []
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]

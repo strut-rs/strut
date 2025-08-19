@@ -1,0 +1,117 @@
+[package]
+name           = "strut"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "Backend in Rust: convenient and configurable with Strut."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name = "strut"
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+# Core
+strut-core        = { path = "../strut_core" }
+
+# Runtime
+tokio             = { workspace = true, features = ["rt-multi-thread", "sync"] }
+
+# Config
+strut-config      = { path = "../strut_config" }
+strut-factory     = { path = "../strut_factory" }
+strut-deserialize = { path = "../strut_deserialize" }
+config            = { workspace = true, features = [] }
+serde             = { workspace = true, features = ["std", "derive"] }
+dotenvy           = { workspace = true, features = [] }
+parking_lot       = { workspace = true, features = [] }
+
+# Tracing
+strut-tracing     = { optional = true, path = "../strut_tracing" }
+tracing           = { optional = true, workspace = true, features = [] }
+tracing-log       = { optional = true, workspace = true, features = ["std", "log-tracer"] }
+
+# Sentry
+strut-sentry      = { optional = true, path = "../strut_sentry" }
+
+# Database
+strut-database    = { optional = true, path = "../strut_database" }
+
+# RabbitMQ
+strut-rabbitmq    = { optional = true, path = "../strut_rabbitmq" }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+scopeguard        = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+# Core
+config-async              = ["config/async"]
+config-live               = []
+
+# Tracing
+tracing                   = ["dep:strut-tracing", "dep:tracing", "strut-sentry?/tracing"]
+tracing-log               = ["tracing", "dep:tracing-log"]
+tracing-json              = ["tracing", "strut-tracing/json"]
+
+# Database
+database-mysql            = ["dep:strut-database", "strut-database/mysql"]
+database-postgres         = ["dep:strut-database", "strut-database/postgres"]
+database-sqlite           = ["dep:strut-database", "strut-database/sqlite"]
+database-default-mysql    = ["database-mysql", "strut-database/default-mysql"]
+database-default-postgres = ["database-postgres", "strut-database/default-postgres"]
+database-default-sqlite   = ["database-sqlite", "strut-database/default-sqlite"]
+
+# RabbitMQ
+rabbitmq                  = ["dep:strut-rabbitmq"]
+rabbitmq-json             = ["rabbitmq", "strut-rabbitmq/json"]
+
+# Sentry
+sentry                    = ["dep:strut-sentry"]
+
+# Internal
+default = []
+_probe  = [
+    "config-async", "config-live",
+    "tracing", "tracing-json", "tracing-log",
+    "database-mysql", "database-postgres", "database-sqlite", "database-default-sqlite",
+    "rabbitmq", "rabbitmq-json",
+    "sentry",
+]
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]
+include_feature_sets = [
+    [
+        "config-async", "config-live",
+        "tracing", "tracing-json", "tracing-log",
+        "database-mysql", "database-postgres", "database-sqlite", "database-default-sqlite",
+        "rabbitmq",
+        "sentry",
+    ],
+]
+isolated_feature_sets = [
+    ["config-async", "config-live"],
+    ["tracing", "tracing-json", "tracing-log"],
+    ["tracing", "tracing-json", "sentry"],
+    ["database-mysql", "database-postgres", "database-sqlite", "database-default-mysql"],
+    ["database-mysql", "database-postgres", "database-sqlite", "database-default-postgres"],
+    ["database-mysql", "database-postgres", "database-sqlite", "database-default-sqlite"],
+    ["rabbitmq", "rabbitmq-json"],
+    ["sentry"],
+]

@@ -1,0 +1,2 @@
+[rabbitmq.ingress]
+named_ingress = "demo.queue.name"

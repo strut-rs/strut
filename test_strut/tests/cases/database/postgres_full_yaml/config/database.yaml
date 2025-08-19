@@ -1,0 +1,30 @@
+database: # assuming PostgreSQL is the default type
+    host: localhost
+    port: 5433
+    username: user
+    password: secret
+    database: db
+    socket: /var/run/postgresql/.s.PGSQL.5432
+    ssl_mode: prefer # disable, allow, prefer (default), require, verify_ca, verify_full
+    ssl_root_cert: /etc/ssl/certs/ca-certificates.crt # or inline starting with `-----BEGIN`
+    ssl_client_cert: /etc/ssl/certs/client-cert.pem # as above
+    ssl_client_key: /etc/ssl/private/client-key.pem # as above
+    statement_cache_capacity: 100
+    application_name: my-app
+    log_settings:
+        statements_level: debug # off, error, warn, info, debug, trace
+        slow_statements_level: warn # as above
+        slow_statements_duration: 2s 500ms # parsed using `humantime` crate
+    extra_float_digits: 2
+    options:
+        search_path: myschema,public
+    pool_options:
+        min_connections: 0
+        max_connections: 10
+        test_before_acquire: true
+        acquire_time_level: off # off, error, warn, info, debug, trace
+        acquire_slow_level: warn # as above
+        acquire_slow_threshold: 2s # parsed using `humantime` crate
+        acquire_timeout: 30s # as above
+        max_lifetime: 30min # as above
+        idle_timeout: 10min # as above

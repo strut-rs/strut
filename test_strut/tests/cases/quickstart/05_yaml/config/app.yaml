@@ -1,0 +1,4 @@
+name: app-backend
+
+tracing:
+    flavor: json # “flavour” works too :)

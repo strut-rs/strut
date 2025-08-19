@@ -1,0 +1,70 @@
+# RabbitMQ credentials
+x-rabbitmq-credentials: &rabbitmq-credentials
+    environment:
+        RABBITMQ_DEFAULT_USER: admin
+        RABBITMQ_DEFAULT_PASS: admin
+
+# RabbitMQ settings
+x-rabbitmq-settings: &rabbitmq-settings
+    restart: always
+    healthcheck:
+        test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 5s
+    command: >
+        sh -c "rabbitmq-plugins enable rabbitmq_consistent_hash_exchange && rabbitmq-server"
+
+# Volumes for data persistence
+volumes:
+    rabbitmq313_data:
+    rabbitmq40_data:
+    rabbitmq41_data:
+    rabbitmq_data:
+
+# All tested RabbitMQ versions
+services:
+    # RabbitMQ 3.13
+    rabbitmq313:
+        image: rabbitmq:3.13-management
+        container_name: rabbitmq313
+        ports:
+            - "3372:5672"   # AMQP protocol
+            - "33672:15672" # Management web UI
+        volumes:
+            - rabbitmq313_data:/var/lib/rabbitmq
+        <<: [*rabbitmq-credentials, *rabbitmq-settings]
+
+    # RabbitMQ 4.0
+    rabbitmq40:
+        image: rabbitmq:4.0-management
+        container_name: rabbitmq40
+        ports:
+            - "4072:5672"   # AMQP protocol
+            - "40672:15672" # Management web UI
+        volumes:
+            - rabbitmq40_data:/var/lib/rabbitmq
+        <<: [*rabbitmq-credentials, *rabbitmq-settings]
+
+    # RabbitMQ 4.1
+    rabbitmq41:
+        image: rabbitmq:4.1-management
+        container_name: rabbitmq41
+        ports:
+            - "4172:5672"   # AMQP protocol
+            - "41672:15672" # Management web UI
+        volumes:
+            - rabbitmq41_data:/var/lib/rabbitmq
+        <<: [*rabbitmq-credentials, *rabbitmq-settings]
+
+    # RabbitMQ (latest)
+    rabbitmq:
+        image: rabbitmq:management
+        container_name: rabbitmq
+        ports:
+            - "5672:5672"   # AMQP protocol
+            - "15672:15672" # Management web UI
+        volumes:
+            - rabbitmq_data:/var/lib/rabbitmq
+        <<: *rabbitmq-settings

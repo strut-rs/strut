@@ -1,0 +1,7 @@
+database:
+    url: sqlite://default.db?mode=ro # assuming SQLite is the default type
+
+    sqlite: # two syntaxes below are equivalent
+        named_sqlite_a: sqlite://named_sqlite_a.db?mode=ro
+        named_sqlite_b:
+            url: sqlite://named_sqlite_b.db?mode=ro

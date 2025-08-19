@@ -1,0 +1,71 @@
+[package]
+name           = "strut-rabbitmq"
+version        = "0.0.1"
+edition        = "2024"
+rust-version   = "1.85.0"
+authors        = ["Erik Sargazakov <erik@serpnet.org>"]
+license        = "MIT"
+readme         = "README.md"
+repository     = "https://github.com/strut-rs/strut"
+homepage       = "https://strut-rs.github.io"
+description    = "A convenience layer around `lapin` crate. Part of the Strut family."
+categories     = ["asynchronous", "config", "database", "web-programming"]
+keywords       = ["opinionated", "application", "framework"]
+publish        = true
+
+[lib]
+name = "strut_rabbitmq"
+
+#
+# DEPENDENCIES
+#
+[dependencies]
+# Internal
+strut-factory        = { path = "../strut_factory" }
+strut-deserialize    = { path = "../strut_deserialize" }
+strut-sync           = { path = "../strut_sync" }
+strut-util           = { path = "../strut_util", features = ["backoff"] }
+strut-core           = { path = "../strut_core" }
+
+# External
+lapin                = { workspace = true, features = ["rustls"] }
+tokio-executor-trait = { workspace = true, features = [] }
+tokio-reactor-trait  = { workspace = true, features = [] }
+serde                = { workspace = true, features = ["std", "derive"] }
+serde-value          = { workspace = true, features = [] }
+percent-encoding     = { workspace = true, features = ["std"] }
+secure-string        = { workspace = true, features = ["serde"] }
+thiserror            = { workspace = true, features = ["std"] }
+tokio                = { workspace = true, features = ["sync", "time"] }
+futures              = { workspace = true, features = ["std"] }
+tracing              = { workspace = true, features = ["std"] }
+parking_lot          = { workspace = true, features = [] }
+async-trait          = { workspace = true, features = [] }
+nonempty             = { workspace = true, features = ["std"] }
+humantime            = { workspace = true, features = [] }
+
+# Optional
+serde_json           = { optional = true, workspace = true, features = [] }
+
+[dev-dependencies]
+pretty_assertions    = { workspace = true }
+serde_json           = { workspace = true }
+serde_yml            = { workspace = true }
+
+#
+# FEATURES
+#
+[features]
+json    = ["dep:serde_json", "serde_json/std"]
+
+default = []
+_probe  = ["json"]
+
+#
+# FEATURE COMBINATIONS
+#
+[package.metadata.cargo-feature-combinations]
+exclude_features = ["default", "_probe"]
+isolated_feature_sets = [
+    ["json"],
+]

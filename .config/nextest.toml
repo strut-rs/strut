@@ -1,0 +1,30 @@
+##
+## `default`
+## For crate-local tests (unit tests, doc tests, integration tests).
+##
+[profile.default]
+fail-fast = true
+
+##
+## `ci`
+## Same as `default`, but in CI environment.
+##
+[profile.ci]
+fail-fast = false
+
+##
+## `rabbitmq`
+## For system tests of (mostly) `strut-rabbitmq` (located in `test-strut-rabbitmq`).
+##
+[profile.rabbitmq]
+retries = 2 # to highlight flaky tests locally
+slow-timeout = { period = "15s", terminate-after = 2 } # reasonable for local
+
+##
+## `ci-rabbitmq`
+## Same as `rabbitmq`, but in CI environment.
+##
+[profile.ci-rabbitmq]
+fail-fast = false
+retries = 0
+slow-timeout = { period = "30s", terminate-after = 3 }

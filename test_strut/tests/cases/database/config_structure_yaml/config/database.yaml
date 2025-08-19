@@ -1,0 +1,14 @@
+database:
+    # default database handle goes here
+
+    mysql:
+        named_mysql_a: {} # named_mysql_a database handle goes here
+        named_mysql_b: {} # named_mysql_b database handle goes here
+
+    postgres:
+        named_postgres_a: {} # named_postgres_a database handle goes here
+        named_postgres_b: {} # named_postgres_b database handle goes here
+
+    sqlite:
+        named_sqlite_a: {} # named_sqlite_a database handle goes here
+        named_sqlite_b: {} # named_sqlite_b database handle goes here

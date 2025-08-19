@@ -1,0 +1,93 @@
+[workspace]
+members = [
+    # Framework
+    "strut",
+
+    # Components
+    "strut_config",
+    "strut_tracing",
+    "strut_database",
+    "strut_rabbitmq",
+    "strut_sentry",
+
+    # Internal
+    "strut_factory",
+    "strut_core",
+
+    # Utilities
+    "strut_util",
+    "strut_sync",
+    "strut_deserialize",
+
+    # Test suites
+    "test_util",
+    "test_strut",
+    "test_strut_rabbitmq",
+]
+resolver = "3"
+
+[workspace.dependencies]
+# Runtime
+tokio                = { version = "1.47.1", default-features = false }
+tokio-util           = { version = "0.7.16", default-features = false }
+tokio-test           = { version = "0.4.4", default-features = false }
+
+# Async
+async-trait          = { version = "0.1.89", default-features = false }
+futures              = { version = "0.3.31", default-features = false }
+
+# Database
+sqlx                 = { version = "0.8.6", default-features = false }
+sqlx-core            = { version = "0.8.6", default-features = false }
+
+# RabbitMQ
+lapin                = { version = "2.5.4", default-features = false }
+tokio-executor-trait = { version = "2.1.3", default-features = false }
+tokio-reactor-trait  = { version = "1.1.0", default-features = false }
+
+# Sentry
+sentry               = { version = "0.42.0", default-features = false }
+sentry-tracing       = { version = "0.42.0", default-features = false }
+
+# Proc-Macro
+convert_case         = { version = "0.8.0", default-features = false }
+proc-macro2          = { version = "1.0.101", default-features = false }
+quote                = { version = "1.0.40", default-features = false }
+syn                  = { version = "2.0.106", default-features = false }
+
+# Serialization
+serde                = { version = "1.0.219", default-features = false }
+serde-value          = { version = "0.7.0", default-features = false }
+serde_json           = { version = "1.0.143", default-features = true  }
+serde_yml            = { version = "0.0.12", default-features = true  }
+humantime            = { version = "2.2.0", default-features = false }
+
+# Config
+config               = { version = "0.15.14", default-features = false }
+dotenvy              = { version = "0.15.7", default-features = false }
+parking_lot          = { version = "0.12.4", default-features = false }
+
+
+# Tracing
+tracing              = { version = "0.1.41", default-features = false }
+tracing-core         = { version = "0.1.34", default-features = false }
+tracing-log          = { version = "0.2.0", default-features = false }
+tracing-subscriber   = { version = "0.3.19", default-features = false }
+log                  = { version = "0.4.27", default-features = false }
+
+# API
+secure-string        = { version = "0.3.0", default-features = false }
+nonempty             = { version = "0.12.0", default-features = false }
+
+# Utilities
+backoff              = { version = "0.4.0", default-features = false }
+percent-encoding     = { version = "2.3.1", default-features = false }
+thiserror            = { version = "2.0.15", default-features = false }
+scopeguard           = { version = "1.2.0", default-features = false }
+
+# Development (occur only in [dev-dependencies])
+pretty_assertions    = { version = "1.4.1" }
+assertables          = { version = "9.8.2" }
+regex                = { version = "1.11.1" }
+rand                 = { version = "0.9.2" }
+libc                 = { version = "0.2.175" }

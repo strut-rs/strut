@@ -1,0 +1,7 @@
+database:
+    url: mysql://root:password@localhost:3306/default # assuming MySQL/MariaDB is the default type
+
+    mysql: # two syntaxes below are equivalent
+        named_mysql_a: mysql://root:password@localhost:3306/named_mysql_a
+        named_mysql_b:
+            url: mysql://root:password@localhost:3306/named_mysql_b
