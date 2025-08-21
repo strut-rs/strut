@@ -9,8 +9,8 @@ readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "Backend in Rust: convenient and configurable with Strut."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns"]
+keywords       = ["backend", "convenient", "configurable", "asynchronous", "modular"]
 publish        = true
 
 [lib]

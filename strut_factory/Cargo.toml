@@ -9,8 +9,8 @@ readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "Procedural macros. Part of the Strut family."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns"]
+keywords       = ["internal", "procedural-macros"]
 publish        = true
 
 [lib]
