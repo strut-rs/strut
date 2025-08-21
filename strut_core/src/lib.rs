@@ -36,8 +36,8 @@ pub const ALERT_FIELD_NAME: &str = "alert";
 ///
 /// ## Usage
 ///
-/// When using any of the public `strut` components without the framework
-/// itself, await on this function as a last thing before completing the main
+/// When using any of the Strut components without the `strut` crate itself,
+/// await on this function as a last thing before completing the main
 /// application logic.
 pub async fn strut_shutdown() {
     // Terminate the global application context

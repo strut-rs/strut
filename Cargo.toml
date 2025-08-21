@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    # Framework
+    # Entrypoint
     "strut",
 
     # Components

@@ -106,6 +106,6 @@ pub use self::repr::ingress::{AckingBehavior, HeadersMatchingBehavior};
 /// Re-exports the `strut_shutdown` function to facilitate stand-alone usage of
 /// this crate.
 ///
-/// When using this crate without the `strut` framework itself, await on this
+/// When using this crate without the `strut` crate itself, await on this
 /// function as a last thing before completing the main application logic.
 pub use strut_core::strut_shutdown;
