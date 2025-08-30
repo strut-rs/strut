@@ -1,0 +1,179 @@
+[changelog]
+trim = true
+
+header = """
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+"""
+
+body = """
+{#- Helper: generate GitHub repo URL #}
+{%- macro remote_url() -%}
+    https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro %}
+
+{#- Helper: print single commit #}
+{%- macro print_commit(commit) %}
+    {%- set msg = commit.message | upper_first %}
+    {%- if commit.remote.pr_number %}
+        {%- set suffix = ' ([#' ~ commit.remote.pr_number ~ '])' %}
+        {%- set msg = msg | trim_end_matches(pat=suffix) %}
+    {%- endif -%}
+    - {% if commit.scope %}`{{ commit.scope }}`: {% endif %}
+      {%- if commit.breaking %}[**breaking**] {% endif %}
+      {{- msg }}
+      {%- if commit.remote.pr_number %} ([#{{ commit.remote.pr_number }}]){% endif %}
+      {%- if commit.id %} ([{{ commit.id | truncate(length=7, end="") }}]){% endif %}
+{%- endmacro %}
+
+{#- Extract short version from tag #}
+{%- if version %}
+    {%- set short_version = version | split(pat="-") | last | trim_start_matches(pat="v") %}
+{%- else %}
+    {%- set short_version = "Unreleased" %}
+{%- endif %}
+
+{#- Compose version URL #}
+{%- set version_url = "" %}
+{%- set base_url = "https://github.com/" ~ remote.github.owner ~ "/" ~ remote.github.repo %}
+{%- if previous.version %}
+    {%- if version %}
+        {%- set version_url = base_url ~ "/compare/" ~ previous.version ~ ".." ~ version %}
+    {%- else %}
+        {%- set version_url = base_url ~ "/compare/" ~ previous.version ~ "..HEAD" %}
+    {%- endif %}
+{%- else %}
+    {%- if version %}
+        {%- set version_url = base_url ~ "/releases/tag/" ~ version %}
+    {%- endif %}
+{%- endif %}
+
+{#- Compose version heading #}
+{%- if version_url %}
+    {%- set version_heading = "[" ~ short_version ~ "](" ~ version_url ~ ")" %}
+{%- else %}
+    {%- set version_heading = short_version %}
+{%- endif %}
+
+{#- Store the list of commits to render #}
+{%- set rendered_commits = commits
+    | filter(attribute="merge_commit", value=false)
+    | unique(attribute="message")
+%}
+
+{#- Collect all issue numbers from all commits into a single list #}
+{%- set issue_nums = [] %}
+{%- for commit in rendered_commits %}
+    {%- if commit.links %}
+        {%- for link in commit.links %}
+            {%- set issue_num = link.text | int %}
+            {%- set_global issue_nums = issue_nums | concat(with=issue_num) %}
+        {%- endfor %}
+    {%- endif %}
+{%- endfor %}
+{#- Collect all links from all commits into a single list #}
+{%- for commit in rendered_commits %}
+    {%- if commit.remote.pr_number %}
+        {%- set pr_num = commit.remote.pr_number | int %}
+        {%- set_global issue_nums = issue_nums | concat(with=pr_num) %}
+    {%- endif %}
+{%- endfor %}
+
+{#- Now that we have a flat list, remove duplicates and sort it #}
+{%- set issue_nums = issue_nums | sort | unique %}
+
+{#- Print out the version heading #}
+## {{ version_heading }}{% if version %} - {{ timestamp | date(format="%Y-%m-%d") }}{%- endif %}
+
+{#- Loop through commits by group and print them #}
+{%- for group, commits in rendered_commits | group_by(attribute="group") %}
+    {%- raw %}\n{% endraw %}
+    ### {{ group | striptags | trim | upper_first }}
+    {% for commit in commits
+        | filter(attribute="scope")
+        | sort(attribute="scope")
+    %}
+        {{ self::print_commit(commit=commit) }}
+    {%- endfor %}
+
+    {%- for commit in commits %}
+        {%- if not commit.scope %}
+            {{ self::print_commit(commit=commit) }}
+        {%- endif %}
+    {%- endfor %}
+{%- endfor %}
+
+{%- if not rendered_commits %}
+    {%- raw %}\n{% endraw %}
+    _No changes logged for this version._
+{%- endif %}
+
+{#- Create the issue link reference table #}
+{%- if issue_nums %}
+    {%- raw %}\n{% endraw %}
+    {%- for issue_num in issue_nums %}
+        [#{{ issue_num }}]: {{ self::remote_url() }}/issues/{{ issue_num }}
+    {%- endfor %}
+{%- endif %}
+
+{#- Create the commit link reference table #}
+{%- if rendered_commits %}
+    {%- raw %}\n{% endraw %}
+    {%- for commit in rendered_commits %}
+        {%- if commit.id %}
+            [{{ commit.id | truncate(length=7, end="") }}]: {{ self::remote_url() }}/commit/{{ commit.id }}
+        {%- endif %}
+    {%- endfor %}
+{%- endif %}
+
+{%- raw %}\n{% endraw %}
+"""
+
+[git]
+protect_breaking_commits = true
+
+commit_preprocessors = [
+    # Replace #123 with [#123] in the commit message
+    { pattern = '#(\d+)', replace = '[#$1]' },
+    # Replace !123 with [#123] in the commit message
+    { pattern = '!(\d+)', replace = '[#$1]' },
+]
+
+link_parsers = [
+    # Extract #123 and turn it into a GitHub issue link object
+    { pattern = '#(\d+)', text = '$1', href = 'https://github.com/strut-rs/strut/issues/$1' },
+    # Extract !123 and turn it into a GitHub issue link object
+    { pattern = '!(\d+)', text = '$1', href = 'https://github.com/strut-rs/strut/issues/$1' },
+]
+
+commit_parsers = [
+    { footer = "^Changelog: ?ignore", skip = true },
+
+    { message = "^feat", group = "<!-- 0 -->Features ⛰️" },
+    { message = "^fix", group = "<!-- 1 -->Bug Fixes 🐛" },
+
+    { message = "^refactor\\(clippy\\)", skip = true },
+    { message = "^refactor", group = "<!-- 2 -->Refactor 🚜" },
+    { message = "^doc", group = "<!-- 3 -->Documentation 📚" },
+    { message = "^perf", group = "<!-- 4 -->Performance ⚡" },
+    { message = "^style", group = "<!-- 5 -->Styling 🎨" },
+    { message = "^test", group = "<!-- 6 -->Testing 🧪" },
+
+    { message = "^chore\\(release\\)", skip = true },
+    { message = "^chore\\(deps.*\\)", skip = true },
+    { message = "^chore\\(pr\\)", skip = true },
+
+    { message = "^chore|^ci", group = "<!-- 7 -->Miscellaneous Tasks ⚙️" },
+    { message = "^security", group = "<!-- 8 -->Security 🛡️" },
+    { message = "^revert", group = "<!-- 9 -->Revert ◀️" },
+
+    { message = ".*", group = "<!-- 10 -->Other 💼" },
+]
+
+[remote.github]
+owner = "strut-rs"
+repo = "strut"
