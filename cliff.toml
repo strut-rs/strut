@@ -154,10 +154,10 @@ commit_parsers = [
     { footer = "^Changelog: ?ignore", skip = true },
 
     { message = "^feat", group = "<!-- 0 -->Features ⛰️" },
-    { message = "^fix", group = "<!-- 1 -->Bug Fixes 🐛" },
+    { message = "^fix", group = "<!-- 1 -->Bug fixes 🐛" },
 
     { message = "^refactor\\(clippy\\)", skip = true },
-    { message = "^refactor", group = "<!-- 2 -->Refactor 🚜" },
+    { message = "^refactor", group = "<!-- 2 -->Refactoring 🚜" },
     { message = "^doc", group = "<!-- 3 -->Documentation 📚" },
     { message = "^perf", group = "<!-- 4 -->Performance ⚡" },
     { message = "^style", group = "<!-- 5 -->Styling 🎨" },
@@ -167,7 +167,7 @@ commit_parsers = [
     { message = "^chore\\(deps.*\\)", skip = true },
     { message = "^chore\\(pr\\)", skip = true },
 
-    { message = "^chore|^ci", group = "<!-- 7 -->Miscellaneous Tasks ⚙️" },
+    { message = "^chore|^ci", group = "<!-- 7 -->Miscellaneous ⚙️" },
     { message = "^security", group = "<!-- 8 -->Security 🛡️" },
     { message = "^revert", group = "<!-- 9 -->Revert ◀️" },
 
