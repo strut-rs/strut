@@ -5,12 +5,13 @@ edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
 license        = "MIT"
+documentation  = "https://docs.rs/strut-factory"
 readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "Procedural macros. Part of the Strut family."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns"]
+keywords       = ["internal", "procedural-macros"]
 publish        = true
 
 [lib]
@@ -27,7 +28,7 @@ syn          = { workspace = true, features = ["clone-impls", "derive", "full", 
 convert_case = { workspace = true, features = [] }
 
 [dev-dependencies]
-strut             = { path = "../strut" }
+strut             = { path = "../strut", version = "0.0.1" }
 pretty_assertions = { workspace = true }
 serde             = { workspace = true }
 serde_json        = { workspace = true }

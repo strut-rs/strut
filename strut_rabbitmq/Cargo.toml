@@ -5,12 +5,13 @@ edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
 license        = "MIT"
+documentation  = "https://docs.rs/strut-rabbitmq"
 readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "A convenience layer around `lapin` crate. Part of the Strut family."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns"]
+keywords       = ["component", "messaging", "amqp", "rabbitmq"]
 publish        = true
 
 [lib]
@@ -21,11 +22,11 @@ name = "strut_rabbitmq"
 #
 [dependencies]
 # Internal
-strut-factory        = { path = "../strut_factory" }
-strut-deserialize    = { path = "../strut_deserialize" }
-strut-sync           = { path = "../strut_sync" }
-strut-util           = { path = "../strut_util", features = ["backoff"] }
-strut-core           = { path = "../strut_core" }
+strut-factory        = { path = "../strut_factory",     version = "0.0.1" }
+strut-deserialize    = { path = "../strut_deserialize", version = "0.0.1" }
+strut-sync           = { path = "../strut_sync",        version = "0.0.1" }
+strut-util           = { path = "../strut_util",        version = "0.0.1", features = ["backoff"] }
+strut-core           = { path = "../strut_core",        version = "0.0.1" }
 
 # External
 lapin                = { workspace = true, features = ["rustls"] }

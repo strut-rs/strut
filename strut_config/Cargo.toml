@@ -5,12 +5,13 @@ edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
 license        = "MIT"
+documentation  = "https://docs.rs/strut-config"
 readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "A companion to `config` crate. Part of the Strut family."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns", "filesystem"]
+keywords       = ["internal", "helper", "config", "filesystem", "environment"]
 publish        = true
 
 [lib]
@@ -20,7 +21,7 @@ name = "strut_config"
 # DEPENDENCIES
 #
 [dependencies]
-strut-core = { path = "../strut_core" }
+strut-core = { path = "../strut_core", version = "0.0.1" }
 config     = { workspace = true, features = ["toml", "yaml"] }
 
 #

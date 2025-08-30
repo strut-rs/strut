@@ -5,12 +5,13 @@ edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
 license        = "MIT"
+documentation  = "https://docs.rs/strut-database"
 readme         = "README.md"
 repository     = "https://github.com/strut-rs/strut"
 homepage       = "https://strut-rs.github.io"
 description    = "A convenience layer around `sqlx` crate. Part of the Strut family."
-categories     = ["asynchronous", "config", "database", "web-programming"]
-keywords       = ["opinionated", "application", "framework"]
+categories     = ["asynchronous", "config", "rust-patterns", "database"]
+keywords       = ["component", "mysql", "postgresql", "sqlite", "connection"]
 publish        = true
 
 [lib]
@@ -21,11 +22,11 @@ name = "strut_database"
 #
 [dependencies]
 # Internal
-strut-factory     = { path = "../strut_factory" }
-strut-deserialize = { path = "../strut_deserialize" }
-strut-sync        = { path = "../strut_sync" }
-strut-core        = { path = "../strut_core" }
-strut-util        = { path = "../strut_util", features = ["backoff"] }
+strut-factory     = { path = "../strut_factory",     version = "0.0.1" }
+strut-deserialize = { path = "../strut_deserialize", version = "0.0.1" }
+strut-sync        = { path = "../strut_sync",        version = "0.0.1" }
+strut-core        = { path = "../strut_core",        version = "0.0.1" }
+strut-util        = { path = "../strut_util",        version = "0.0.1", features = ["backoff"] }
 
 # External
 sqlx              = { workspace = true, features = ["runtime-tokio"] }

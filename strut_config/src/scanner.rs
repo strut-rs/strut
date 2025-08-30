@@ -71,8 +71,8 @@ impl Scanner {
         config_files
     }
 
-    /// Resolves the application’s **configuration directory**: where the
-    /// framework looks for configuration files.
+    /// Resolves the application’s **configuration directory**: where Strut
+    /// looks for configuration files.
     ///
     /// Dynamically determines the path at runtime.
     ///
