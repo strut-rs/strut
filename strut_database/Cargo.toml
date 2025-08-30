@@ -21,11 +21,11 @@ name = "strut_database"
 #
 [dependencies]
 # Internal
-strut-factory     = { path = "../strut_factory" }
-strut-deserialize = { path = "../strut_deserialize" }
-strut-sync        = { path = "../strut_sync" }
-strut-core        = { path = "../strut_core" }
-strut-util        = { path = "../strut_util", features = ["backoff"] }
+strut-factory     = { path = "../strut_factory",     version = "0.0.1" }
+strut-deserialize = { path = "../strut_deserialize", version = "0.0.1" }
+strut-sync        = { path = "../strut_sync",        version = "0.0.1" }
+strut-core        = { path = "../strut_core",        version = "0.0.1" }
+strut-util        = { path = "../strut_util",        version = "0.0.1", features = ["backoff"] }
 
 # External
 sqlx              = { workspace = true, features = ["runtime-tokio"] }

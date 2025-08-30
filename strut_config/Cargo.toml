@@ -20,7 +20,7 @@ name = "strut_config"
 # DEPENDENCIES
 #
 [dependencies]
-strut-core = { path = "../strut_core" }
+strut-core = { path = "../strut_core", version = "0.0.1" }
 config     = { workspace = true, features = ["toml", "yaml"] }
 
 #
