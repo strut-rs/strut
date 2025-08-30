@@ -270,12 +270,13 @@ tag_all version:
     #!/usr/bin/env bash
     set -euxo pipefail
     just _tag_root '{{version}}'
-    for package_suffix in \
-        macros \
-        util \
-        core \
-        alternative \
-    ; do just _tag_sub '{{version}}' "$package_suffix"; done
+    for d in strut_*/; do
+        if [ -d "$d" ]; then
+            package_suffix="${d#strut_}"
+            package_suffix="${package_suffix%/}"
+            just _tag_sub '{{version}}' "$package_suffix"
+        fi
+    done
 
 _tag_root version:
     [ -d 'strut' ]
@@ -295,13 +296,12 @@ cl_new_all version:
     #!/usr/bin/env bash
     set -euxo pipefail
     just _cl_new_root '{{version}}'
-    for package_suffix in \
-        macros \
-        util \
-        core \
-        alternative \
-    ; do
-        just _cl_new_sub '{{version}}' "$package_suffix"
+    for d in strut_*/; do
+        if [ -d "$d" ]; then
+            package_suffix="${d#strut_}"
+            package_suffix="${package_suffix%/}"
+            just _cl_new_sub '{{version}}' "$package_suffix"
+        fi
     done
 
 _cl_new_root version:
@@ -322,13 +322,12 @@ cl_prepend_all version:
     #!/usr/bin/env bash
     set -euxo pipefail
     just _cl_prepend_root '{{version}}'
-    for package_suffix in \
-        macros \
-        util \
-        core \
-        alternative \
-    ; do
-        just _cl_prepend_sub '{{version}}' "$package_suffix"
+    for d in strut_*/; do
+        if [ -d "$d" ]; then
+            package_suffix="${d#strut_}"
+            package_suffix="${package_suffix%/}"
+            just _cl_prepend_sub '{{version}}' "$package_suffix"
+        fi
     done
 
 _cl_prepend_root version:
