@@ -1,6 +1,6 @@
 [package]
 name           = "strut-database"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -22,11 +22,11 @@ name = "strut_database"
 #
 [dependencies]
 # Internal
-strut-factory     = { path = "../strut_factory",     version = "0.0.1" }
-strut-deserialize = { path = "../strut_deserialize", version = "0.0.1" }
-strut-sync        = { path = "../strut_sync",        version = "0.0.1" }
-strut-core        = { path = "../strut_core",        version = "0.0.1" }
-strut-util        = { path = "../strut_util",        version = "0.0.1", features = ["backoff"] }
+strut-factory     = { path = "../strut_factory",     version = "0.0.2" }
+strut-deserialize = { path = "../strut_deserialize", version = "0.0.2" }
+strut-sync        = { path = "../strut_sync",        version = "0.0.2" }
+strut-core        = { path = "../strut_core",        version = "0.0.2" }
+strut-util        = { path = "../strut_util",        version = "0.0.2", features = ["backoff"] }
 
 # External
 sqlx              = { workspace = true, features = ["runtime-tokio"] }

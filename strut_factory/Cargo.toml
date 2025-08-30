@@ -1,6 +1,6 @@
 [package]
 name           = "strut-factory"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -28,7 +28,7 @@ syn          = { workspace = true, features = ["clone-impls", "derive", "full", 
 convert_case = { workspace = true, features = [] }
 
 [dev-dependencies]
-strut             = { path = "../strut", version = "0.0.1" }
+strut             = { path = "../strut", version = "0.0.2" }
 pretty_assertions = { workspace = true }
 serde             = { workspace = true }
 serde_json        = { workspace = true }

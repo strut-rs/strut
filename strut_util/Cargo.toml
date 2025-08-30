@@ -1,6 +1,6 @@
 [package]
 name           = "strut-util"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -22,8 +22,8 @@ name = "strut_util"
 #
 [dependencies]
 # Internal
-strut-factory     = { optional = true, path = "../strut_factory",     version = "0.0.1" }
-strut-deserialize = { optional = true, path = "../strut_deserialize", version = "0.0.1" }
+strut-factory     = { optional = true, path = "../strut_factory",     version = "0.0.2" }
+strut-deserialize = { optional = true, path = "../strut_deserialize", version = "0.0.2" }
 
 # External
 serde             = { optional = true, workspace = true, features = ["std", "derive"] }
