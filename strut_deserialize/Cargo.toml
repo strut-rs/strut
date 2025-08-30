@@ -1,6 +1,6 @@
 [package]
 name           = "strut-deserialize"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -39,3 +39,9 @@ _probe  = []
 #
 [package.metadata.cargo-feature-combinations]
 exclude_features = ["default", "_probe"]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

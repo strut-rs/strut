@@ -1,6 +1,6 @@
 [package]
 name           = "strut"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -22,33 +22,33 @@ name = "strut"
 #
 [dependencies]
 # Core
-strut-core        = { path = "../strut_core", version = "0.0.1" }
+strut-core        = { path = "../strut_core", version = "0.0.2" }
 
 # Runtime
 tokio             = { workspace = true, features = ["rt-multi-thread", "sync"] }
 
 # Config
-strut-config      = { path = "../strut_config",      version = "0.0.1" }
-strut-factory     = { path = "../strut_factory",     version = "0.0.1" }
-strut-deserialize = { path = "../strut_deserialize", version = "0.0.1" }
+strut-config      = { path = "../strut_config",      version = "0.0.2" }
+strut-factory     = { path = "../strut_factory",     version = "0.0.2" }
+strut-deserialize = { path = "../strut_deserialize", version = "0.0.2" }
 config            = { workspace = true, features = [] }
 serde             = { workspace = true, features = ["std", "derive"] }
 dotenvy           = { workspace = true, features = [] }
 parking_lot       = { workspace = true, features = [] }
 
 # Tracing
-strut-tracing     = { optional = true, path = "../strut_tracing",  version = "0.0.1" }
+strut-tracing     = { optional = true, path = "../strut_tracing",  version = "0.0.2" }
 tracing           = { optional = true, workspace = true, features = [] }
 tracing-log       = { optional = true, workspace = true, features = ["std", "log-tracer"] }
 
 # Sentry
-strut-sentry      = { optional = true, path = "../strut_sentry",   version = "0.0.1" }
+strut-sentry      = { optional = true, path = "../strut_sentry",   version = "0.0.2" }
 
 # Database
-strut-database    = { optional = true, path = "../strut_database", version = "0.0.1" }
+strut-database    = { optional = true, path = "../strut_database", version = "0.0.2" }
 
 # RabbitMQ
-strut-rabbitmq    = { optional = true, path = "../strut_rabbitmq", version = "0.0.1" }
+strut-rabbitmq    = { optional = true, path = "../strut_rabbitmq", version = "0.0.2" }
 
 [dev-dependencies]
 pretty_assertions = { workspace = true }
@@ -116,3 +116,9 @@ isolated_feature_sets = [
     ["rabbitmq", "rabbitmq-json"],
     ["sentry"],
 ]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

@@ -91,3 +91,15 @@ assertables          = { version = "9.8.2" }
 regex                = { version = "1.11.1" }
 rand                 = { version = "0.9.2" }
 libc                 = { version = "0.2.175" }
+
+[workspace.metadata.release]
+sign-commit = true
+sign-tag = true
+push = false
+pre-release-commit-message = "chore: update released package versions"
+tag = false
+tag-message = "chore: prepare {{crate_name}} v{{version}}"
+tag-name = "{{prefix}}{{version}}"
+publish = false
+enable-features = [ "_probe" ]
+dependent-version = "upgrade"

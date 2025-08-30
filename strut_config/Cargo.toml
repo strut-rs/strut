@@ -1,6 +1,6 @@
 [package]
 name           = "strut-config"
-version        = "0.0.1"
+version        = "0.0.2"
 edition        = "2024"
 rust-version   = "1.85.0"
 authors        = ["Erik Sargazakov <erik@serpnet.org>"]
@@ -21,7 +21,7 @@ name = "strut_config"
 # DEPENDENCIES
 #
 [dependencies]
-strut-core = { path = "../strut_core", version = "0.0.1" }
+strut-core = { path = "../strut_core", version = "0.0.2" }
 config     = { workspace = true, features = ["toml", "yaml"] }
 
 #
@@ -36,3 +36,9 @@ _probe  = []
 #
 [package.metadata.cargo-feature-combinations]
 exclude_features = ["default", "_probe"]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true
