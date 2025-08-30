@@ -28,7 +28,6 @@ syn          = { workspace = true, features = ["clone-impls", "derive", "full", 
 convert_case = { workspace = true, features = [] }
 
 [dev-dependencies]
-strut             = { path = "../strut", version = "0.0.2" }
 pretty_assertions = { workspace = true }
 serde             = { workspace = true }
 serde_json        = { workspace = true }
