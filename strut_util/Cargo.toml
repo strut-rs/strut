@@ -22,8 +22,8 @@ name = "strut_util"
 #
 [dependencies]
 # Internal
-strut-factory     = { optional = true, path = "../strut_factory" }
-strut-deserialize = { optional = true, path = "../strut_deserialize" }
+strut-factory     = { optional = true, path = "../strut_factory",     version = "0.0.1" }
+strut-deserialize = { optional = true, path = "../strut_deserialize", version = "0.0.1" }
 
 # External
 serde             = { optional = true, workspace = true, features = ["std", "derive"] }
