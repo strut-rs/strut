@@ -66,3 +66,9 @@ isolated_feature_sets = [
     ["mysql", "postgres", "sqlite", "default-postgres"],
     ["mysql", "postgres", "sqlite", "default-sqlite"],
 ]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

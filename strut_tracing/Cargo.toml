@@ -55,3 +55,9 @@ isolated_feature_sets = [
     ["json"],
     ["log"],
 ]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

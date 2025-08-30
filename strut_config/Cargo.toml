@@ -36,3 +36,9 @@ _probe  = []
 #
 [package.metadata.cargo-feature-combinations]
 exclude_features = ["default", "_probe"]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

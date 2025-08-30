@@ -58,3 +58,9 @@ exclude_features = ["default", "_probe"]
 isolated_feature_sets = [
     ["tracing"],
 ]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true

@@ -116,3 +116,9 @@ isolated_feature_sets = [
     ["rabbitmq", "rabbitmq-json"],
     ["sentry"],
 ]
+
+#
+# RELEASE
+#
+[package.metadata.release]
+release = true
