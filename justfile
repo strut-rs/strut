@@ -182,51 +182,6 @@ _dirty_test_rabbitmq:
     RABBITMQ_PORT=4172 cargo nextest run -p test-strut-rabbitmq --profile=rabbitmq --all-targets --run-ignored=all
 
 ##
-## Experiment
-##
-
-exp:
-    #!/usr/bin/env bash
-    set -e
-
-    # Make a temp file for buffering doctest output
-    doctest_output=$(mktemp)
-
-    # Write the last will and testament
-    trap 'rm -f "$doctest_output"; docker compose -f test_strut_rabbitmq/docker-compose.yml down --volumes' EXIT
-
-    # Start the long command in the background, capturing output
-    cargo fc --fail-fast --pedantic --only-packages-with-lib-target test --doc \
-        >"$doctest_output" 2>&1 &
-    doctest_pid=$!
-
-    # Run short commands serially
-    set -x
-    docker compose -f test_strut_rabbitmq/docker-compose.yml down --volumes
-    docker compose -f test_strut_rabbitmq/docker-compose.yml up -d
-    cargo fc --fail-fast --pedantic check
-    cargo fc --fail-fast --pedantic check --release
-    cargo fc --fail-fast --pedantic build
-    cargo fc --fail-fast --pedantic build --release
-    cargo fc --fail-fast --pedantic nextest run --no-tests=pass
-    RABBITMQ_PORT=3372 cargo nextest run -p test-strut-rabbitmq --profile=rabbitmq --all-targets --run-ignored=all
-    RABBITMQ_PORT=4072 cargo nextest run -p test-strut-rabbitmq --profile=rabbitmq --all-targets --run-ignored=all
-    RABBITMQ_PORT=4172 cargo nextest run -p test-strut-rabbitmq --profile=rabbitmq --all-targets --run-ignored=all
-    set +x
-
-    # Start tailing the fresh doctest output from this point
-    echo
-    echo "==== Output of: cargo fc ... test --doc (from this point) ===="
-    tail -n 0 -f "$doctest_output" &
-    tail_pid=$!
-
-    # Wait for the long command to finish
-    wait $doctest_pid
-
-    # Kill the tail process
-    kill $tail_pid
-
-##
 ## CI
 ## CI-specific versions of some of the same recipes.
 ##
