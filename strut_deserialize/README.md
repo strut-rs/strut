@@ -9,7 +9,7 @@
 <hr />
 
 <div align="center">
-    <a href="https://strut-rs.github.io">
+    <a href="https://strut.rs">
         <strong>Homepage</strong>
     </a>
     <span> | </span>
@@ -33,7 +33,7 @@
 <br />
 
 - Strut is a Rust application scaffold that aims to simplify common backend chores.
-- The **documentation** is available on the ➡️ [homepage](https://strut-rs.github.io).
+- The **documentation** is available on the ➡️ [homepage](https://strut.rs).
 
 ## Crate `strut-deserialize`
 
